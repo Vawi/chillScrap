@@ -2,14 +2,9 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 const url = 'https://chillhop.bandcamp.com/album/chillhop-essentials-spring-2020';
 
-const screen = {
-    width: 640,
-    height: 480
-};
-
 let titleArray = [];
 
-let driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless().windowSize(screen)).build();
+let driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless()).build();
 
 async function scrap() {
     try {
@@ -22,6 +17,8 @@ async function scrap() {
         }
 
         console.log(titleArray);
+
+        
 
     } finally {
         await driver.quit();
