@@ -6,9 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "chillscrap": "./src/index.js"
+  },
   "author": "vawi",
   "license": "ISC",
   "dependencies": {
+    "meow": "^7.0.1",
     "selenium-webdriver": "^4.0.0-alpha.7"
   }
 }
