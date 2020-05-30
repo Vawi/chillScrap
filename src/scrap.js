@@ -2,17 +2,21 @@
 const {Builder, By} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
-const url = 'https://chillhop.bandcamp.com/album/chillhop-essentials-spring-2020';
+//const url = 'https://chillhop.bandcamp.com/album/chillhop-essentials-spring-2020';
 
 const trackList = new Map();
 const driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless()).build();
 
-module.exports.scrap = async function() {
+module.exports.startMusic = async function() {
     await driver.get(url);
     await driver.findElement(By.className("playbutton")).click();
 }
 
-module.exports.tracklist = async function() {
+module.exports.pauseMusic = async function() {
+    await driver.findElement(By.className("playbutton playing")).click();
+}
+
+module.exports.tracklist = async function(url) {
     await driver.get(url);
     let elements = await driver.findElements(By.className('track-title'));
     for(let e of elements) {

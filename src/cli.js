@@ -2,11 +2,14 @@
 const meow = require('meow');
 const chillsc = require('./scrap');
 const readline = require("readline");
+const uri = require("./createURI");
 
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
 });
+
+let date = new Date();
 
 module.exports.handleCli = function () {
 	const cli = meow(`
@@ -20,16 +23,19 @@ module.exports.handleCli = function () {
       --music, -m listen music or not 
 
 	Examples
-	  $ foo unicorns --rainbow
-	  🌈 unicorns 🌈
+	  $ chillscrap --saison=summer -y=2020 -t -m 
+	  get the tracklist and run music for Chillhop Essentials Summer 2020 (if exist)
+	  🌈 lister Chillhop Record Summer 2020 🌈
 	`, {
 		flags: {
 			saison: {
 				type: 'string',
+				default: 'summer',
 				alias: 's'
 			},
 			year: {
 				type: 'number',
+				default: date.getFullYear() - 1,
 				alias: 'y'
 			},
 			tracklist: {
@@ -43,23 +49,21 @@ module.exports.handleCli = function () {
 		}
 	});
 
-	for(let i = 0; i < cli.input.length; i++) {
-		console.log(cli.input[i]);
+	let url = uri.createURI(cli.flags.saison, cli.flags.year);
+	if(cli.flags.tracklist) {
+		chillsc.tracklist(url);
 	}
-
-	console.log(cli.flags);
-	console.log(cli.help);
-
-	if(cli.flags.tracklist === true) {
-		chillsc.tracklist();
+	if(cli.flags.music) {
+		chillsc.scrap()
 	}
 	
-	rl.question("What is your name ? ", function(name) {
-		rl.question("Where do you live ? ", function(country) {
-			console.log(`${name}, is a citizen of ${country}`);
+	while(true) {
+		rl.question("What do you want ? -h or --help to see helper", function(cmds) {
+			console.log(`THATS A LOT OF CMDS : ${cmds}`);
 			rl.close();
+			// ADD next step, parse cmds
 		});
-	}); 
+	}
 
 
 	rl.on("close", async function() {
