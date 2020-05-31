@@ -7,7 +7,7 @@ const firefox = require('selenium-webdriver/firefox');
 const trackList = new Map();
 const driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless()).build();
 
-module.exports.startMusic = async function() {
+module.exports.startMusic = async function(url) {
     await driver.get(url);
     await driver.findElement(By.className("playbutton")).click();
 }
@@ -31,9 +31,10 @@ module.exports.tracklist = async function(url) {
 module.exports.quit = async function() {
     console.log("\nBye bye, see you soon !");
     await driver.quit();
+    process.exit(0);
 }
 
-module.exports.getNewStuff = async function() {
+module.exports.getNewStuff = async function() { // not ready yet
     await driver.get("https://bandcamp.com/");
     let titles = await driver.findElements(By.xpath('/html/body/div[3]/div/div[2]/div[1]/div[2]/div[6]/div[9]/div[1]/div[2]/div/a'));  // /html/body/div[3]/div/div[2]/div[1]/div[2]/div[6]/div[9]/div[1]/div[2]/div[1]/a
     let artistes = await driver.findElements(By.className('item-artiste'));

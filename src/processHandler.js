@@ -3,8 +3,8 @@ const chillsc = require('./scrap');
 // Handle specific process 
 
 process.on('SIGINT', async function() {
-    await chillsc.quit();
     console.log("Caught interrupt signal -- Shutting down driver");
+    await chillsc.quit();
 });
 
 process.on('uncaughtException', (err, origin) => {
