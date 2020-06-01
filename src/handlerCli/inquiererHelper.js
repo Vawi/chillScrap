@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const helper = require('./cmds/helper');
 const scrap = require('../scrap');
+const uriHelper = require('../createURI');
 
 module.exports.basicStep = function() {
 	inquirer
@@ -22,6 +23,7 @@ module.exports.basicStep = function() {
 				case 'Albums':
 					break;
 				case 'Chill':
+					await playChill();
 					break;
 				case 'Pause':
 					await scrap.pauseMusic();
@@ -34,15 +36,42 @@ module.exports.basicStep = function() {
 				default:
 				  console.log(`Sorry, we don't handle that cmds, try again`);
 			}
-			this.basicStep()
+			this.basicStep();
 		});
 }
 
-function whatAlbumToPlay() {
-
+async function playChill() {
+	let sy = await selectSaisonYearToPlay();
+	let uri = uriHelper.createURI(sy.saison, sy.year, false);
+	console.log(uri);
+	scrap.startMusic(uri);
 }
 
-function SelectYearSaison() {
+async function selectSaisonYearToPlay() {
+	let saison = await inquirer
+		.prompt([
+			{
+			type: 'list',
+			name: 'saison',
+			message: 'What saison and year do you want ?',
+			choices: [
+				'fall', 'winter', 'summer', 'spring',
+			],
+		}]);
 	
+	let year = await inquirer
+		.prompt([
+			{
+			type: 'input',
+			name: 'year',
+			message: 'What year do you want ?',
+			},
+		]);
+
+	return { ...saison, ...year };
+}
+
+function getWhatNew() {
+	scrap.getNewStuff();
 }
 

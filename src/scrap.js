@@ -13,7 +13,11 @@ module.exports.startMusic = async function(url) {
 }
 
 module.exports.pauseMusic = async function() {
-    await driver.findElement(By.className("playbutton playing")).click();
+    try {
+        await driver.findElement(By.className("playbutton playing")).click();
+    } catch(error) {
+        console.log("No music to pause");
+    }
 }
 
 module.exports.tracklist = async function(url) {
