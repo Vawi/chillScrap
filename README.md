@@ -1,0 +1,2 @@
+# chillScrap
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cc1af446e9cf46b989b2745db6fb8bc2)](https://app.codacy.com/manual/Vawi/chillScrap?utm_source=github.com&utm_medium=referral&utm_content=Vawi/chillScrap&utm_campaign=Badge_Grade_Dashboard)
