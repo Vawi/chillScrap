@@ -2,12 +2,10 @@
 
 const defaultBandcamp = "https://bandcamp.com/";
 const baseUrl = 'https://chillhop.bandcamp.com/album/chillhop-essentials-';
-const saisonArr = ["winter", "spring", "summer", "fall"]
+const saisonArr = ['winter', 'spring', 'summer', 'fall'];
 
 module.exports.createURI = function (saison, year, def) {
     let d = new Date();
-
-    console.log("CREATE URI SAISON : " + saison);
 
     if(def) {
         return defaultBandcamp;

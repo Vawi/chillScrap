@@ -2,7 +2,7 @@
 const meow = require('meow');
 const chillsc = require('../scrap');
 const uri = require("../createURI");
-const helper = require('./cmds/helper');
+const helper = require('./helper');
 
 let date = new Date();
 

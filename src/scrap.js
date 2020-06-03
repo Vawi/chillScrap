@@ -50,6 +50,15 @@ module.exports.getNewStuff = async function() { // not ready yet
     }
 }
 
+module.exports.login = async function(username, password) {
+    await (await driver).get("https://bandcamp.com/login");
+    await driver.findElement(By.id('username-field')).sendKeys(username);
+    await driver.findElement(By.id('password-field')).sendKeys(password);
+    await driver.findElement(By.className("buttons")).click();
+
+    // Find something to make sure the user is log
+}
+
 module.exports.getCurrentUrl = async function() {
     return await driver.getCurrentUrl();
 }

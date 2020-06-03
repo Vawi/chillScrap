@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 
-const helper = require('./cmds/helper');
+const helper = require('./helper');
 const scrap = require('../scrap');
 const uriHelper = require('../createURI');
 const proc = require('../processHandler');
@@ -15,7 +15,7 @@ module.exports.basicStep = function() {
 			name: 'whatNext',
 			message: 'What do you want to do ?',
 			choices: [
-				'Help', 'Albums', 'Chill', 'Pause', 'KILL', 'NewAndDefault',
+				'Help', 'Albums', 'Chill', 'Pause', 'login', 'KILL', 'NewAndDefault',
 			    ],
 			},
 		])
@@ -32,6 +32,9 @@ module.exports.basicStep = function() {
 				case 'Pause':
 					await scrap.pauseMusic();
 					break;
+				case 'login':
+					await scrap.login();
+					break; 
 				case 'KILL':
 					await scrap.quit();
 					break;
@@ -60,8 +63,8 @@ async function selectSaisonYearToPlay() {
 			name: 'saison',
 			message: 'What saison and year do you want ?',
 			choices: [
-				chalk.yellow('fall'), chalk.cyan('winter'), 
-				chalk.red('summer'), chalk.green('spring'),
+				'fall', 'winter', 
+				'summer', 'spring',
 			],
 		}]);
 	
@@ -74,7 +77,7 @@ async function selectSaisonYearToPlay() {
 			},
 		]);
 
-	return { ...saison, ...year };
+	return { ...saison, ...year};
 }
 
 function getWhatNew() {
