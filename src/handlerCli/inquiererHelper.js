@@ -1,7 +1,11 @@
 const inquirer = require('inquirer');
+const chalk = require('chalk');
+
 const helper = require('./cmds/helper');
 const scrap = require('../scrap');
 const uriHelper = require('../createURI');
+const proc = require('../processHandler');
+const album = require('../helper/albumHelper');
 
 module.exports.basicStep = function() {
 	inquirer
@@ -38,6 +42,7 @@ module.exports.basicStep = function() {
 			}
 			this.basicStep();
 		});
+	proc.sigint();
 }
 
 async function playChill() {
@@ -55,7 +60,8 @@ async function selectSaisonYearToPlay() {
 			name: 'saison',
 			message: 'What saison and year do you want ?',
 			choices: [
-				'fall', 'winter', 'summer', 'spring',
+				chalk.yellow('fall'), chalk.cyan('winter'), 
+				chalk.red('summer'), chalk.green('spring'),
 			],
 		}]);
 	
@@ -73,5 +79,17 @@ async function selectSaisonYearToPlay() {
 
 function getWhatNew() {
 	scrap.getNewStuff();
+}
+
+function displayAllArtiste() {
+
+}
+
+function DisplayAllAlbum() {
+
+}
+
+function displayAllAlbumFromArtiste(artiste) {
+
 }
 
