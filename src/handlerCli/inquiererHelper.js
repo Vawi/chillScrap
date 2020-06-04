@@ -5,7 +5,7 @@ const helper = require('./helper');
 const scrap = require('../scrap');
 const uriHelper = require('../createURI');
 const proc = require('../processHandler');
-const album = require('../helper/albumHelper');
+const albumHelper = require('../helper/albumHelper');
 
 module.exports.basicStep = function() {
 	inquirer
@@ -15,7 +15,7 @@ module.exports.basicStep = function() {
 			name: 'whatNext',
 			message: 'What do you want to do ?',
 			choices: [
-				'Help', 'Albums', 'Chill', 'Pause', 'login', 'KILL', 'NewAndDefault',
+				'Help', 'Albums', 'Artiste', 'Chill', 'Pause', 'login', 'KILL', 'NewAndDefault',
 			    ],
 			},
 		])
@@ -25,6 +25,10 @@ module.exports.basicStep = function() {
 				  console.log(helper.helper);
 				  break;
 				case 'Albums':
+					displayAllAlbum();
+					break;
+				case 'Artiste':
+					displayAllAlbumFromArtiste();
 					break;
 				case 'Chill':
 					await playChill();
@@ -73,6 +77,7 @@ async function selectSaisonYearToPlay() {
 			{
 			type: 'input',
 			name: 'year',
+			default: '2019',
 			message: 'What year do you want ?',
 			},
 		]);
@@ -88,8 +93,8 @@ function displayAllArtiste() {
 
 }
 
-function DisplayAllAlbum() {
-
+function displayAllAlbum() {
+	console.log(albumHelper.getAlbums());
 }
 
 function displayAllAlbumFromArtiste(artiste) {

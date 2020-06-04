@@ -1,4 +1,4 @@
-module.exports = [
+const album = [
     {
         artiste:"David Peacock, Augustine Mayuga Gonzales",
         album:"Hollow Knight Piano Collections",
@@ -40,3 +40,11 @@ module.exports = [
         url:"https://christopherlarkin.bandcamp.com/album/hollow-knight-original-soundtrack",
     },
 ]
+
+module.exports.getAlbums = function() {
+    return album.map(a => a.album);
+}
+
+module.exports.getAlbumsByArtiste = function(artiste) {
+    return album.filter(a => a.artiste == artiste).map(a => a.album);
+}
