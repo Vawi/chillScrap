@@ -1,4 +1,4 @@
-const album = [
+const listAlbums = [
     {
         artiste:"David Peacock, Augustine Mayuga Gonzales",
         album:"Hollow Knight Piano Collections",
@@ -42,9 +42,13 @@ const album = [
 ]
 
 module.exports.getAlbums = function() {
-    return album.map(a => a.album);
+    return listAlbums.map(a => a.album);
 }
 
 module.exports.getAlbumsByArtiste = function(artiste) {
-    return album.filter(a => a.artiste == artiste).map(a => a.album);
+    return listAlbums.filter(a => a.artiste == artiste).map(a => a.album);
+}
+
+module.exports.getUriFromAlbum = function(album) {
+    return listAlbums.filter(a => a.album == album).map(a => a.url);
 }

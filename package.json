@@ -4,7 +4,7 @@
   "description": "WebScrapping Bandcamp chillhop ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "bin": {
     "chillscrap": "./src/index.js"
@@ -16,5 +16,8 @@
     "inquirer": "^7.1.0",
     "meow": "^7.0.1",
     "selenium-webdriver": "^4.0.0-alpha.7"
+  },
+  "devDependencies": {
+    "mocha": "^7.2.0"
   }
 }

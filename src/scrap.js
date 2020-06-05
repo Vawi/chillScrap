@@ -2,9 +2,6 @@
 const {Builder, By} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
-//const url = 'https://chillhop.bandcamp.com/album/chillhop-essentials-spring-2020';
-
-const trackList = new Map();
 const driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless()).build();
 
 module.exports.startMusic = async function(url) {
@@ -21,6 +18,7 @@ module.exports.pauseMusic = async function() {
 }
 
 module.exports.tracklist = async function(url) {
+    const trackList = new Map();
     await driver.get(url);
     let elements = await driver.findElements(By.className('track-title'));
     for(let e of elements) {
@@ -29,7 +27,7 @@ module.exports.tracklist = async function(url) {
         trackList.set(split[0], split[1]);
     }
 
-    console.log(trackList);
+    return trackList;
 }
 
 module.exports.quit = async function() {
