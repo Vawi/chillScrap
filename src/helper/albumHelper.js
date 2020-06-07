@@ -45,6 +45,10 @@ module.exports.getAlbums = function() {
     return listAlbums.map(a => a.album);
 }
 
+module.exports.getAllArtiste = function() {
+    return listAlbums.map(a => a.artiste);
+}
+
 module.exports.getAlbumsByArtiste = function(artiste) {
     return listAlbums.filter(a => a.artiste == artiste).map(a => a.album);
 }

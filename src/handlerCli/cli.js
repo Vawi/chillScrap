@@ -36,7 +36,7 @@ module.exports.handleCli = function () {
 	});
 
 	let url = uri.createURI(cli.flags.saison, cli.flags.year, cli.flags.default);
-	console.log(url);
+	
 	if(cli.flags.tracklist) {
 		chillsc.tracklist(url);
 	}

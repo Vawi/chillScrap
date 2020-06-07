@@ -24,7 +24,7 @@ module.exports.basicStep = function() {
 				  console.log(helper.helper);
 				  break;
 				case 'Albums':
-					displayAllAlbum();
+					await displayAllAlbum();
 					break;
 				case 'Artiste':
 					displayAllAlbumFromArtiste();
@@ -89,14 +89,25 @@ function getWhatNew() {
 }
 
 function displayAllArtiste() {
-
+	console.log(displayAllArtiste);
 }
 
-function displayAllAlbum() {
-	console.log(albumHelper.getAlbums());
+async function displayAllAlbum() {
+	let album = await inquirer
+		.prompt([
+			{
+			type: 'list',
+			name: 'album',
+			message: 'What album do you want to listen ?',
+			choices: albumHelper.getAlbums(),
+		}]);
+
+	let url = albumHelper.getUriFromAlbum(album);
+
+	console.log(url);
 }
 
 function displayAllAlbumFromArtiste(artiste) {
-
+	console.log(albumHelper.getAlbumsByArtiste(artiste));
 }
 
