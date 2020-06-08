@@ -2,5 +2,15 @@
 const chillCli = require('./src/handlerCli/cli');
 const inqHelp = require('./src/handlerCli/inquiererHelper');
 
-chillCli.handleCli();
-inqHelp.basicStep();
+
+function main() {
+
+    chillCli.handleCli();
+    inqHelp.basicStep();
+
+    process.on('SIGINT', async function() {
+        await chillCli.quit();
+    });
+}
+
+main();

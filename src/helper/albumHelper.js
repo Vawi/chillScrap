@@ -46,7 +46,7 @@ module.exports.getAlbums = function() {
 }
 
 module.exports.getAllArtiste = function() {
-    return listAlbums.map(a => a.artiste);
+    return Array.from(new Set(listAlbums.map(a => a.artiste)));
 }
 
 module.exports.getAlbumsByArtiste = function(artiste) {
@@ -54,5 +54,7 @@ module.exports.getAlbumsByArtiste = function(artiste) {
 }
 
 module.exports.getUriFromAlbum = function(album) {
-    return listAlbums.filter(a => a.album == album).map(a => a.url);
+    let url = listAlbums.find(a => a.album == album).url;
+    console.log(url);
+    return url;
 }

@@ -14,20 +14,20 @@ module.exports.basicStep = function() {
 			name: 'whatNext',
 			message: 'What do you want to do ?',
 			choices: [
-				'Help', 'Albums', 'Artiste', 'Chill', 'Pause', 'login', 'KILL', 'NewAndDefault',
+				'Help', 'Albums', 'Artiste', 'Chill', 'Pause', 'login', 'KILL', 'NewAndDefault', 'End the Capitalism',
 			    ],
 			},
 		])
 		.then(async answers => {
 			switch (answers.whatNext) {
 				case 'Help':
-				  console.log(helper.helper);
-				  break;
+				  	console.log(helper.helper);
+				  	break;
 				case 'Albums':
 					await displayAllAlbum();
 					break;
 				case 'Artiste':
-					displayAllAlbumFromArtiste();
+					await displayAllArtiste();
 					break;
 				case 'Chill':
 					await playChill();
@@ -36,12 +36,15 @@ module.exports.basicStep = function() {
 					await scrap.pauseMusic();
 					break;
 				case 'login':
-					await scrap.login();
+					await computeLogin();
 					break; 
 				case 'KILL':
 					await scrap.quit();
 					break;
 				case 'NewAndDefault':
+					break;
+				case 'End the Capitalism':
+					BADABOOM();
 					break;
 				default:
 				  console.log(`Sorry, we don't handle that cmds, try again`);
@@ -88,12 +91,35 @@ function getWhatNew() {
 	scrap.getNewStuff();
 }
 
-function displayAllArtiste() {
-	console.log(displayAllArtiste);
+async function displayAllArtiste() {
+	let response = await inquirer
+		.prompt([
+			{
+			type: 'list',
+			name: 'artiste',
+			message: 'What artiste do you want to listen ?',
+			choices: albumHelper.getAllArtiste(),
+		}]);
+
+	await displayAllAlbumFromArtiste(response.artiste);
+}
+
+async function displayAllAlbumFromArtiste(artiste) {
+	let response = await inquirer
+		.prompt([
+			{
+			type: 'list',
+			name: 'album',
+			message: 'What artiste do you want to listen ?',
+			choices: albumHelper.getAlbumsByArtiste(artiste),
+		}]);
+
+	let url = albumHelper.getUriFromAlbum(response.album);
+	scrap.startMusic(url);
 }
 
 async function displayAllAlbum() {
-	let album = await inquirer
+	let response = await inquirer
 		.prompt([
 			{
 			type: 'list',
@@ -102,12 +128,11 @@ async function displayAllAlbum() {
 			choices: albumHelper.getAlbums(),
 		}]);
 
-	let url = albumHelper.getUriFromAlbum(album);
-
-	console.log(url);
+	let url = albumHelper.getUriFromAlbum(response.album);
+	scrap.startMusic(url);
 }
 
-function displayAllAlbumFromArtiste(artiste) {
-	console.log(albumHelper.getAlbumsByArtiste(artiste));
-}
 
+function BADABOOM() {
+	console.log("You win bitches <3");
+}
