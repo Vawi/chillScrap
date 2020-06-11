@@ -136,3 +136,27 @@ async function displayAllAlbum() {
 function BADABOOM() {
 	console.log("You win bitches <3");
 }
+
+async function computeLogin() {
+	let pseudo = await inquirer
+		.prompt([
+			{
+			type: 'input',
+			name: 'pseudonyme',
+			message: 'Enter pseudonyme',
+			},
+		]);
+
+	let password = await inquirer 
+		.prompt([
+			{
+			type: 'password',
+			name: 'password',
+			message: 'Enter password',
+			},
+		]);
+		
+	let isLog = await scrap.login(pseudo.pseudonyme, password.password)
+
+	isLog ? console.log("You're log ! Congrat !") : console.log("Try again !");
+}

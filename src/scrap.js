@@ -3,6 +3,7 @@ const {Builder, By} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
 const driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless()).build();
+let isLog = false;
 
 module.exports.startMusic = async function(url) {
     await driver.get(url);
@@ -49,12 +50,25 @@ module.exports.getNewStuff = async function() { // not ready yet
 }
 
 module.exports.login = async function(username, password) {
-    await (await driver).get("https://bandcamp.com/login");
+    await driver.get("https://bandcamp.com/login");
     await driver.findElement(By.id('username-field')).sendKeys(username);
     await driver.findElement(By.id('password-field')).sendKeys(password);
     await driver.findElement(By.className("buttons")).click();
+    console.log(await this.getCurrentUrl());
+    if (await this.getCurrentUrl() == "https://bandcamp.com/" + username) {
+        isLog = true;
+        return true;
+    }
+}
 
-    // Find something to make sure the user is log
+module.exports.disconnect = async function() {
+    if(isLog) {
+        await driver.get("https://bandcamp.com/logout");
+        return true;
+    } else {
+        return false;
+    }
+    
 }
 
 module.exports.getCurrentUrl = async function() {
