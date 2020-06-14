@@ -53,8 +53,7 @@ module.exports.login = async function(username, password) {
     await driver.get("https://bandcamp.com/login");
     await driver.findElement(By.id('username-field')).sendKeys(username);
     await driver.findElement(By.id('password-field')).sendKeys(password);
-    await driver.findElement(By.className("buttons")).click();
-    console.log(await this.getCurrentUrl());
+    await driver.findElement(By.tagName('button')).click();
     if (await this.getCurrentUrl() == "https://bandcamp.com/" + username) {
         isLog = true;
         return true;
@@ -64,6 +63,7 @@ module.exports.login = async function(username, password) {
 module.exports.disconnect = async function() {
     if(isLog) {
         await driver.get("https://bandcamp.com/logout");
+        isLog = false;
         return true;
     } else {
         return false;
