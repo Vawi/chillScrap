@@ -42,6 +42,7 @@ module.exports.basicStep = function() {
 					await scrap.quit();
 					break;
 				case 'NewAndDefault':
+					await scrap.getNewStuff();
 					break;
 				case 'End the Capitalism':
 					BADABOOM();
