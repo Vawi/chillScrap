@@ -5,6 +5,7 @@ const scrap = require('../scrap');
 const uriHelper = require('../createURI');
 const proc = require('../processHandler');
 const albumHelper = require('../helper/albumHelper');
+const albumControler = require('../controler/albumsControler');
 
 module.exports.basicStep = function() {
 	inquirer
@@ -20,31 +21,31 @@ module.exports.basicStep = function() {
 		])
 		.then(async answers => {
 			switch (answers.whatNext) {
-				case 'Help':
+				case "Help":
 				  	console.log(helper.helper);
 				  	break;
-				case 'Albums':
+				case "Albums":
 					await displayAllAlbum();
 					break;
-				case 'Artiste':
+				case "Artiste":
 					await displayAllArtiste();
 					break;
-				case 'Chill':
+				case "Chill":
 					await playChill();
 					break;
-				case 'Pause':
+				case "Pause":
 					await scrap.pauseMusic();
 					break;
-				case 'login':
+				case "login":
 					await computeLogin();
 					break; 
-				case 'KILL':
+				case "KILL":
 					await scrap.quit();
 					break;
-				case 'NewAndDefault':
+				case "NewAndDefault":
 					await scrap.getNewStuff();
 					break;
-				case 'End the Capitalism':
+				case "End the Capitalism":
 					BADABOOM();
 					break;
 				default:
@@ -68,7 +69,7 @@ async function selectSaisonYearToPlay() {
 			{
 			type: 'list',
 			name: 'saison',
-			message: 'What saison and year do you want ?',
+			message: "What saison and year do you want ?",
 			choices: [
 				'fall', 'winter', 
 				'summer', 'spring',
@@ -126,11 +127,12 @@ async function displayAllAlbum() {
 			type: 'list',
 			name: 'album',
 			message: 'What album do you want to listen ?',
-			choices: albumHelper.getAlbums(),
+			choices: await albumControler.getAlbumsByMongo(),
 		}]);
 
 	let url = albumHelper.getUriFromAlbum(response.album);
-	scrap.startMusic(url);
+
+	//scrap.startMusic(url);
 }
 
 

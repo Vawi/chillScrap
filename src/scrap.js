@@ -2,7 +2,7 @@
 const {Builder, By} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
-const driver = new Builder().forBrowser('firefox').setFirefoxOptions(new firefox.Options().headless()).build();
+const driver = new Builder().forBrowser("firefox").setFirefoxOptions(new firefox.Options().headless()).build();
 let isLog = false;
 
 module.exports.startMusic = async function(url) {
@@ -23,7 +23,7 @@ module.exports.tracklist = async function(url) {
     await driver.get(url);
     let elements = await driver.findElements(By.className('track-title'));
     for(let e of elements) {
-        let elem = await e.getText()
+        let elem = await e.getText();
         let split = elem.split(' - ');
         trackList.set(split[0], split[1]);
     }

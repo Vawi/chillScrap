@@ -11,7 +11,7 @@ module.exports.createURI = function (saison, year, def) {
         return defaultBandcamp;
     } else {
         if(!saisonArr.includes(saison)) {
-            saison = "summer"
+            saison = "summer";
         }
         if(year >= d.getFullYear()) {
             year = d.getFullYear() - 1;

@@ -20,4 +20,4 @@ module.exports.helper = (
 	  get the tracklist and run music for Chillhop Essentials Summer 2020 (if exist)
 	  🌈 lister Chillhop Record Summer 2020 🌈\n\n
 	`
-)
+);

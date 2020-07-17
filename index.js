@@ -2,7 +2,7 @@
 const chillCli = require('./src/handlerCli/cli');
 const scrap = require('./src/scrap');
 const inqHelp = require('./src/handlerCli/inquiererHelper');
-const mongo = require('./src/mongoModel/mongoConnection');
+const mongo = require('./src/mongoConnection');
 
 
 function main() {
