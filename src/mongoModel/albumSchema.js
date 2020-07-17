@@ -5,10 +5,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var AlbumSchema = new Schema({
-  artiste: String,
-  album: String,
-  url: String
+  artiste: {type: String, required: true},
+  album: {type: String, required: true},
+  url: {type: String, required: true}
 });
 
 
-var SomeModel = mongoose.model('albumModel', SomeAlbumSchemaModelSchema );
+module.exports = mongoose.model('albumModel', AlbumSchema );
