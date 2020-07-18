@@ -55,6 +55,5 @@ module.exports.getAlbumsByArtiste = function(artiste) {
 
 module.exports.getUriFromAlbum = function(album) {
     let url = listAlbums.find(a => a.album == album).url;
-    console.log(url);
     return url;
 }

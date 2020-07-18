@@ -4,7 +4,6 @@ const helper = require('./helper');
 const scrap = require('../scrap');
 const uriHelper = require('../createURI');
 const proc = require('../processHandler');
-const albumHelper = require('../helper/albumHelper');
 const albumControler = require('../controler/albumsControler');
 
 module.exports.basicStep = function() {
@@ -100,7 +99,7 @@ async function displayAllArtiste() {
 			type: 'list',
 			name: 'artiste',
 			message: 'What artiste do you want to listen ?',
-			choices: albumHelper.getAllArtiste(),
+			choices: await albumControler.getArtistes(),
 		}]);
 
 	await displayAllAlbumFromArtiste(response.artiste);
@@ -113,10 +112,10 @@ async function displayAllAlbumFromArtiste(artiste) {
 			type: 'list',
 			name: 'album',
 			message: 'What artiste do you want to listen ?',
-			choices: albumHelper.getAlbumsByArtiste(artiste),
+			choices: await albumControler.getAlbumsByArtiste(artiste),
 		}]);
 
-	let url = albumHelper.getUriFromAlbum(response.album);
+	let url = await albumControler.getUrlByAlbum(response.album);
 	scrap.startMusic(url);
 }
 
@@ -127,12 +126,11 @@ async function displayAllAlbum() {
 			type: 'list',
 			name: 'album',
 			message: 'What album do you want to listen ?',
-			choices: await albumControler.getAlbumsByMongo(),
+			choices: await albumControler.getAlbums(),
 		}]);
 
-	let url = albumHelper.getUriFromAlbum(response.album);
-
-	//scrap.startMusic(url);
+	let url = await albumControler.getUrlByAlbum(response.album);
+	scrap.startMusic(url);
 }
 
 

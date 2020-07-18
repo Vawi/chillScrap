@@ -12,7 +12,6 @@ describe("Retrieve Album function Test", () => {
     });
     it('should return the uri of a specific album', () => {
         let uri = albumHelper.getUriFromAlbum("Celeste Original Soundtrack");
-        let result = "https://radicaldreamland.bandcamp.com/album/celeste-original-soundtrack";
-        assert.equal(uri, result);
+        assert.equal(uri, "https://radicaldreamland.bandcamp.com/album/celeste-original-soundtrack");
     });
 });
