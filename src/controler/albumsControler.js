@@ -17,7 +17,7 @@ module.exports.getAlbumsByArtiste = async function(name) {
 }
 
 module.exports.getUrlByAlbum = async function(name) {
-    let uri = await albumSch.findOne({ album: name });
+    let uri = await albumSch.findOne({album: name});
     return uri.url;
 }
 
